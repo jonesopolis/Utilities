@@ -7,11 +7,15 @@ namespace Jones.Utilities
 {
     public sealed class LiveConfig<T>
     {
+        public event Action Changed;
+        public event Action Unavailable;
+
         private readonly string _configPath;
+        private readonly Timer _timer;
         private readonly FileSystemWatcher _watcher;
+
         private bool _lastUpdateSuccessful;
         private bool _recentlyUpdated;
-        private readonly Timer _timer;
 
         public LiveConfig(string filePath)
         {
@@ -51,11 +55,7 @@ namespace Jones.Utilities
             _watcher.Changed += (s, e) => tryLoadConfig();
         }
 
-        public Action Changed { get; set; }
-
         public T Configuration { get; private set; }
-
-        public Action Unavailable { get; set; }
 
         public void Watch()
         {
@@ -94,7 +94,7 @@ namespace Jones.Utilities
 
             _recentlyUpdated = true;
             _lastUpdateSuccessful = false;
-            Unavailable();
+            Unavailable?.Invoke();
         }
     }
 }

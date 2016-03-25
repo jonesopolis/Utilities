@@ -11,7 +11,7 @@ namespace TestHarness
     {
         static void Main(string[] args)
         {
-            var live = new LiveConfig<IEnumerable<Config>>("config.json");
+            var live = new LiveConfig<IEnumerable<Config>>(@"C:\users\jonesy\desktop\config.json");
             live.Changed += () => Console.WriteLine(string.Join(", ", live.Configuration.Select(c => c.Test)));
             live.Unavailable += () => Console.WriteLine("Unavailable");
             live.Watch();
