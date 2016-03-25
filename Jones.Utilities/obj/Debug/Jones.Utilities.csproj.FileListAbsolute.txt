@@ -1,1 +1,12 @@
 c:\users\david.rector\git\Utilities\Jones.Utilities\bin\Debug\Jones.Utilities.exe.config
+C:\Users\Jonesy\Desktop\Git\Utilities\Jones.Utilities\obj\Debug\Jones.Utilities.csprojResolveAssemblyReference.cache
+C:\Users\Jonesy\Desktop\Git\Utilities\Jones.Utilities\bin\Debug\Jones.Utilities.dll
+C:\Users\Jonesy\Desktop\Git\Utilities\Jones.Utilities\bin\Debug\Jones.Utilities.pdb
+C:\Users\Jonesy\Desktop\Git\Utilities\Jones.Utilities\obj\Debug\Jones.Utilities.dll
+C:\Users\Jonesy\Desktop\Git\Utilities\Jones.Utilities\obj\Debug\Jones.Utilities.pdb
+C:\Users\Jonesy\Desktop\Utilities\Jones.Utilities\obj\Debug\Jones.Utilities.csprojResolveAssemblyReference.cache
+C:\Users\Jonesy\Desktop\Utilities\Jones.Utilities\obj\Debug\Jones.Utilities.dll
+C:\Users\Jonesy\Desktop\Utilities\Jones.Utilities\obj\Debug\Jones.Utilities.pdb
+C:\Users\Jonesy\Desktop\Utilities\Jones.Utilities\bin\Debug\Jones.Utilities.dll
+C:\Users\Jonesy\Desktop\Utilities\Jones.Utilities\bin\Debug\Jones.Utilities.pdb
+C:\Users\Jonesy\Desktop\Utilities\Jones.Utilities\bin\Debug\Newtonsoft.Json.dll

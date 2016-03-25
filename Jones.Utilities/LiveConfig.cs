@@ -1,14 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Security.Cryptography;
+using System.Timers;
+using Newtonsoft.Json;
 
 namespace Jones.Utilities
 {
     public sealed class LiveConfig<T>
     {
         private readonly string _configPath;
-        readonly FileSystemWatcher _watcher;
+        private readonly FileSystemWatcher _watcher;
+        private bool _lastUpdateSuccessful;
+        private bool _recentlyUpdated;
+        private readonly Timer _timer;
 
         public LiveConfig(string filePath)
         {
@@ -29,15 +32,30 @@ namespace Jones.Utilities
                 throw new FileNotFoundException(_configPath);
             }
 
+            _timer = new Timer();
+            _timer.Elapsed += (s, e) =>
+            {
+                _recentlyUpdated = false;
+                _timer.Stop();
+            };
+            _timer.Interval = 500;
+
             var dir = Path.GetDirectoryName(filePath);
 
             _watcher = new FileSystemWatcher(dir);
             _watcher.Filter = Path.GetFileName(filePath);
 
-            _watcher.Deleted += (s, e) => Unavailable?.Invoke();
+            _watcher.Deleted += (s, e) => trySendUnavailable();
+
             _watcher.Created += (s, e) => tryLoadConfig();
             _watcher.Changed += (s, e) => tryLoadConfig();
         }
+
+        public Action Changed { get; set; }
+
+        public T Configuration { get; private set; }
+
+        public Action Unavailable { get; set; }
 
         public void Watch()
         {
@@ -47,20 +65,36 @@ namespace Jones.Utilities
 
         private void tryLoadConfig()
         {
+            _timer.Start();
+
             try
             {
+                if (_recentlyUpdated && _lastUpdateSuccessful)
+                {
+                    return;
+                }
+
                 Configuration = JsonConvert.DeserializeObject<T>(File.ReadAllText(_configPath));
-                Changed();
+                Changed?.Invoke();
+                _lastUpdateSuccessful = true;
+                _recentlyUpdated = true;
             }
             catch (Exception ex)
             {
-                Unavailable();
+                trySendUnavailable();
             }
         }
 
-        public T Configuration { get; private set; }
+        private void trySendUnavailable()
+        {
+            if (_recentlyUpdated && !_lastUpdateSuccessful)
+            {
+                return;
+            }
 
-        public Action Unavailable { get; set; }
-        public Action Changed { get; set; }
+            _recentlyUpdated = true;
+            _lastUpdateSuccessful = false;
+            Unavailable();
+        }
     }
 }
