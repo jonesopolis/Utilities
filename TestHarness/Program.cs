@@ -11,17 +11,28 @@ namespace TestHarness
     {
         static void Main(string[] args)
         {
-            var live = new LiveConfig<IEnumerable<Config>>(@"C:\users\jonesy\desktop\config.json");
-            live.Changed += () => Console.WriteLine(string.Join(", ", live.Configuration.Select(c => c.Test)));
-            live.Unavailable += () => Console.WriteLine("Unavailable");
-            live.Watch();
+            Config c = new Config();
+            c.PropertyChanged += (s, e) => Console.WriteLine($"{e.PropertyName} : {c.Test}");
 
-            Console.Read();
+
+            while (true)
+            {
+                c.Test = Console.ReadLine();
+            }
         }
     }
 
-    public class Config
+    public class Config : NotifyBase
     {
-        public string Test { get; set; }
+        private string _test;
+
+        public string Test
+        {
+            get { return _test; }
+            set
+            {
+                SetProperty(ref _test, value);
+            }
+        }
     }
 }

@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="FileWatcher.cs" />
     <Compile Include="LiveConfig.cs" />
+    <Compile Include="NotifyBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
