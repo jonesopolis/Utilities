@@ -46,10 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileWatcher.cs" />
     <Compile Include="LiveConfig.cs" />
     <Compile Include="NotifyBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeSwitch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
