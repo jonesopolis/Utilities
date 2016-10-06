@@ -14,6 +14,13 @@ namespace Jones.Utilities
 
         public TypeSwitch<T> Add<TChild>(Action<TChild> action) where TChild : T
         {
+            var type = typeof(TChild);
+
+            if (_dict.ContainsKey(type))
+            {
+                throw new ArgumentException($"{type.Name} was already added to the TypeSwitch");
+            }
+
             _dict.Add(typeof(TChild), o => action((TChild)o));
             return this;
         }
@@ -31,7 +38,7 @@ namespace Jones.Utilities
                 }
             }
 
-            throw new KeyNotFoundException($"{type} or its baseclass not located in typeswitch.");
+            throw new KeyNotFoundException($"{type.Name} or its base class not located in TypeSwitch");
         }
     }
 }

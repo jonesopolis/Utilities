@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jones.Utilities", "Jones.Utilities\Jones.Utilities.csproj", "{7D75A726-2AF9-4199-AE60-A66805F43F5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness", "TestHarness\TestHarness.csproj", "{40FF24D1-97B7-4C06-BA2C-932701FF5EFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jones.Utilities.Tests", "Jones.Utilities.Tests\Jones.Utilities.Tests.csproj", "{05BC9408-9C3E-4ED1-90EF-18E657A3F987}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{40FF24D1-97B7-4C06-BA2C-932701FF5EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40FF24D1-97B7-4C06-BA2C-932701FF5EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40FF24D1-97B7-4C06-BA2C-932701FF5EFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05BC9408-9C3E-4ED1-90EF-18E657A3F987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05BC9408-9C3E-4ED1-90EF-18E657A3F987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05BC9408-9C3E-4ED1-90EF-18E657A3F987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05BC9408-9C3E-4ED1-90EF-18E657A3F987}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

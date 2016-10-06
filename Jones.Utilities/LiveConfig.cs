@@ -44,13 +44,12 @@ namespace Jones.Utilities
             };
             _timer.Interval = 500;
 
-            var dir = Path.GetDirectoryName(filePath);
+            var dir = Path.GetDirectoryName(_configPath);
 
             _watcher = new FileSystemWatcher(dir);
-            _watcher.Filter = Path.GetFileName(filePath);
+            _watcher.Filter = Path.GetFileName(_configPath);
 
             _watcher.Deleted += (s, e) => trySendUnavailable();
-
             _watcher.Created += (s, e) => tryLoadConfig();
             _watcher.Changed += (s, e) => tryLoadConfig();
         }
