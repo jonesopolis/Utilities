@@ -47,11 +47,13 @@ namespace Jones.Utilities
             var dir = Path.GetDirectoryName(_configPath);
 
             _watcher = new FileSystemWatcher(dir);
+            _watcher.NotifyFilter = _watcher.NotifyFilter = NotifyFilters.CreationTime | NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.Size | NotifyFilters.FileName;
             _watcher.Filter = Path.GetFileName(_configPath);
 
-            _watcher.Deleted += (s, e) => trySendUnavailable();
+            _watcher.Deleted += (s, e) => Unavailable?.Invoke();
             _watcher.Created += (s, e) => tryLoadConfig();
             _watcher.Changed += (s, e) => tryLoadConfig();
+            _watcher.Renamed += (s, e) => tryLoadConfig();
         }
 
         public T Configuration { get; private set; }
@@ -64,15 +66,8 @@ namespace Jones.Utilities
 
         private void tryLoadConfig()
         {
-            _timer.Start();
-
             try
             {
-                if (_recentlyUpdated && _lastUpdateSuccessful)
-                {
-                    return;
-                }
-
                 Configuration = JsonConvert.DeserializeObject<T>(File.ReadAllText(_configPath));
                 Changed?.Invoke();
                 _lastUpdateSuccessful = true;
@@ -80,20 +75,8 @@ namespace Jones.Utilities
             }
             catch (Exception ex)
             {
-                trySendUnavailable();
+                Unavailable?.Invoke();
             }
-        }
-
-        private void trySendUnavailable()
-        {
-            if (_recentlyUpdated && !_lastUpdateSuccessful)
-            {
-                return;
-            }
-
-            _recentlyUpdated = true;
-            _lastUpdateSuccessful = false;
-            Unavailable?.Invoke();
         }
     }
 }
